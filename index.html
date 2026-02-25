@@ -12,14 +12,34 @@
 
 <body>
     <div class="background-overlay"></div>
+    <audio id="rain-audio" loop>
+        <source src="assets/rain.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Todo Modal -->
+    <div class="todo-modal" id="todo-modal">
+        <div class="todo-content">
+            <div class="todo-header">
+                <h2>Tasks</h2>
+                <button class="close-btn" id="close-todo-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <ul class="todo-list" id="todo-list">
+                <!-- Tasks will be injected here -->
+            </ul>
+            <div class="todo-input-container">
+                <input type="text" id="todo-input" placeholder="Add a new task...">
+                <button id="add-todo-btn"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+
     <main class="container">
         <!-- Top Navbar -->
         <header class="navbar">
             <h1 class="logo">Avinav</h1>
             <div class="nav-controls">
-                <button class="icon-btn" id="music-btn" title="Music"><i class="fas fa-music"></i></button>
+                <button class="icon-btn" id="music-btn" title="Rainfall ASMR"><i class="fas fa-music"></i></button>
                 <button class="icon-btn" id="tasks-btn" title="Tasks"><i class="fas fa-check-square"></i></button>
-                <button class="icon-btn" id="stats-btn" title="Stats"><i class="fas fa-chart-bar"></i></button>
                 <button class="icon-btn" id="fullscreen-btn" title="Fullscreen"><i class="fas fa-expand"></i></button>
             </div>
         </header>

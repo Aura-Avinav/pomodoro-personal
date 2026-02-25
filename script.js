@@ -132,17 +132,96 @@ document.getElementById('fullscreen-btn').addEventListener('click', () => {
     }
 });
 
-// Sound toggle logic placeholder
-let soundEnabled = true;
-const soundBtn = document.getElementById('sound-btn');
-soundBtn.addEventListener('click', () => {
-    soundEnabled = !soundEnabled;
-    if (soundEnabled) {
-        soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+// Music toggle logic (Rainfall ASMR)
+const musicBtn = document.getElementById('music-btn');
+const rainAudio = document.getElementById('rain-audio');
+let musicEnabled = false;
+
+musicBtn.addEventListener('click', () => {
+    musicEnabled = !musicEnabled;
+    if (musicEnabled) {
+        rainAudio.play().catch(e => console.log("Audio play failed:", e));
+        musicBtn.classList.add('active');
     } else {
-        soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        rainAudio.pause();
+        musicBtn.classList.remove('active');
     }
+});
+
+// Todo List Logic
+const tasksBtn = document.getElementById('tasks-btn');
+const todoModal = document.getElementById('todo-modal');
+const closeTodoBtn = document.getElementById('close-todo-btn');
+const todoInput = document.getElementById('todo-input');
+const addTodoBtn = document.getElementById('add-todo-btn');
+const todoList = document.getElementById('todo-list');
+
+let tasks = JSON.parse(localStorage.getItem('pomodoroTasks')) || [];
+
+function saveTasks() {
+    localStorage.setItem('pomodoroTasks', JSON.stringify(tasks));
+}
+
+function renderTasks() {
+    todoList.innerHTML = '';
+    tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.className = `todo-item ${task.completed ? 'completed' : ''}`;
+
+        li.innerHTML = `
+            <span class="todo-item-text" onclick="toggleTask(${index})">${task.text}</span>
+            <div class="todo-actions">
+                <button onclick="deleteTask(${index})" title="Delete"><i class="fas fa-trash"></i></button>
+            </div>
+        `;
+        todoList.appendChild(li);
+    });
+}
+
+function addTask() {
+    const text = todoInput.value.trim();
+    if (text) {
+        tasks.push({ text, completed: false });
+        todoInput.value = '';
+        saveTasks();
+        renderTasks();
+    }
+}
+
+window.toggleTask = function (index) {
+    tasks[index].completed = !tasks[index].completed;
+    saveTasks();
+    renderTasks();
+};
+
+window.deleteTask = function (index) {
+    tasks.splice(index, 1);
+    saveTasks();
+    renderTasks();
+};
+
+tasksBtn.addEventListener('click', () => {
+    todoModal.classList.add('show');
+    renderTasks();
+    setTimeout(() => todoInput.focus(), 100);
+});
+
+closeTodoBtn.addEventListener('click', () => {
+    todoModal.classList.remove('show');
+});
+
+// Close modal when clicking outside content
+todoModal.addEventListener('click', (e) => {
+    if (e.target === todoModal) {
+        todoModal.classList.remove('show');
+    }
+});
+
+addTodoBtn.addEventListener('click', addTask);
+todoInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') addTask();
 });
 
 // Initialize display
 updateDisplay();
+
