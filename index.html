@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Pomodoro Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <main class="container">
+        <!-- Top Navbar -->
+        <header class="navbar">
+            <h1 class="logo">pomofox</h1>
+            <div class="nav-controls">
+                <button class="icon-btn" id="music-btn" title="Music"><i class="fas fa-music"></i></button>
+                <button class="icon-btn" id="tasks-btn" title="Tasks"><i class="fas fa-check-square"></i></button>
+                <button class="icon-btn" id="stats-btn" title="Stats"><i class="fas fa-chart-bar"></i></button>
+                <button class="icon-btn" id="fullscreen-btn" title="Fullscreen"><i class="fas fa-expand"></i></button>
+            </div>
+        </header>
+
+        <!-- Main Timer Card -->
+        <section class="timer-card">
+            <!-- Settings & Controls -->
+            <div class="card-controls">
+                <button class="action-btn" id="play-btn" title="Play/Pause"><i class="fas fa-play"></i></button>
+                <button class="action-btn" id="reset-btn" title="Reset"><i class="fas fa-sync-alt"></i></button>
+                <button class="action-btn" id="sound-btn" title="Sound Toggle"><i class="fas fa-volume-up"></i></button>
+                <button class="action-btn" id="settings-btn" title="Settings"><i class="fas fa-cog"></i></button>
+            </div>
+            
+            <!-- Circular Timer Display -->
+            <div class="timer-circle">
+                <div class="fox-icon"><i class="fas fa-fox"></i></div>
+                <div class="time-display" id="time-display">25:00</div>
+            </div>
+
+            <!-- Cycle Tracking -->
+            <div class="cycle-tracker">
+                <span>cycle: <span id="cycle-count">1</span></span>
+                <div class="tomatoes">
+                    <i class="fas fa-apple-alt tomato active"></i>
+                    <i class="fas fa-apple-alt tomato"></i>
+                    <i class="fas fa-apple-alt tomato"></i>
+                    <i class="fas fa-apple-alt tomato"></i>
+                </div>
+            </div>
+
+            <!-- Mode Selection -->
+            <div class="mode-toggles">
+                <button class="mode-btn active" data-mode="pomodoro">pomodoro</button>
+                <button class="mode-btn" data-mode="short-break">short break</button>
+                <button class="mode-btn" data-mode="long-break">long break</button>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
