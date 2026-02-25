@@ -132,18 +132,20 @@ document.getElementById('fullscreen-btn').addEventListener('click', () => {
     }
 });
 
-// Music toggle logic (Rainfall ASMR)
+// Music toggle logic (Snowfall)
 const musicBtn = document.getElementById('music-btn');
-const rainAudio = document.getElementById('rain-audio');
+const bgMusic = document.getElementById('music-audio');
+bgMusic.playbackRate = 1.35; // Faster version
+
 let musicEnabled = false;
 
 musicBtn.addEventListener('click', () => {
     musicEnabled = !musicEnabled;
     if (musicEnabled) {
-        rainAudio.play().catch(e => console.log("Audio play failed:", e));
+        bgMusic.play().catch(e => console.log("Audio play failed:", e));
         musicBtn.classList.add('active');
     } else {
-        rainAudio.pause();
+        bgMusic.pause();
         musicBtn.classList.remove('active');
     }
 });
