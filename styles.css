@@ -23,7 +23,7 @@ body {
     display: flex;
     justify-content: center;
     background-color: var(--bg-color);
-    background-image: url('https://cdn.pixabay.com/photo/2024/02/10/15/22/pine-trees-8565123_1280.png');
+    background-image: url('assets/bg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
