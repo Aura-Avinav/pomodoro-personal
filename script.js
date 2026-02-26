@@ -11,6 +11,13 @@ const MODES = {
     'long-break': 15 * 60
 };
 
+const savedSettings = JSON.parse(localStorage.getItem('pomodoroSettings'));
+if (savedSettings) {
+    MODES['pomodoro'] = (savedSettings.pomodoro || 25) * 60;
+    MODES['short-break'] = (savedSettings.shortBreak || 5) * 60;
+    MODES['long-break'] = (savedSettings.longBreak || 15) * 60;
+}
+
 let currentMode = 'pomodoro';
 let timeLeft = MODES[currentMode];
 let timerId = null;
@@ -222,6 +229,62 @@ todoModal.addEventListener('click', (e) => {
 addTodoBtn.addEventListener('click', addTask);
 todoInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') addTask();
+});
+
+// Settings Logic
+const settingsBtn = document.getElementById('settings-btn');
+const settingsModalWrapper = document.getElementById('settings-modal-wrapper');
+const closeSettingsBtn = document.getElementById('close-settings-btn');
+const saveSettingsBtn = document.getElementById('save-settings-btn');
+const settingsModal = document.getElementById('settings-modal');
+
+const settingPomodoro = document.getElementById('setting-pomodoro');
+const settingShortBreak = document.getElementById('setting-short-break');
+const settingLongBreak = document.getElementById('setting-long-break');
+
+function loadSettingsToInputs() {
+    settingPomodoro.value = MODES['pomodoro'] / 60;
+    settingShortBreak.value = MODES['short-break'] / 60;
+    settingLongBreak.value = MODES['long-break'] / 60;
+}
+
+settingsBtn.addEventListener('click', () => {
+    loadSettingsToInputs();
+    settingsModalWrapper.classList.add('show');
+});
+
+closeSettingsBtn.addEventListener('click', () => {
+    settingsModalWrapper.classList.remove('show');
+});
+
+settingsModalWrapper.addEventListener('click', (e) => {
+    if (e.target === settingsModalWrapper) {
+        settingsModalWrapper.classList.remove('show');
+    }
+});
+
+saveSettingsBtn.addEventListener('click', () => {
+    const p = Math.max(1, parseInt(settingPomodoro.value) || 25);
+    const s = Math.max(1, parseInt(settingShortBreak.value) || 5);
+    const l = Math.max(1, parseInt(settingLongBreak.value) || 15);
+
+    MODES['pomodoro'] = p * 60;
+    MODES['short-break'] = s * 60;
+    MODES['long-break'] = l * 60;
+
+    localStorage.setItem('pomodoroSettings', JSON.stringify({
+        pomodoro: p,
+        shortBreak: s,
+        longBreak: l
+    }));
+
+    settingsModalWrapper.classList.remove('show');
+
+    // Reset timer to new settings if not currently running
+    if (!isRunning) {
+        timeLeft = MODES[currentMode];
+        updateDisplay();
+    }
 });
 
 // Initialize display
