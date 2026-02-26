@@ -2,8 +2,8 @@
     --primary-color: #d77f54;
     --primary-dark: #b6613c;
     --bg-color: #6da2a3;
-    --glass-bg: rgba(255, 255, 255, 0.10);
-    --glass-border: rgba(255, 255, 255, 0.20);
+    --glass-bg: rgba(255, 255, 255, 0.20);
+    --glass-border: rgba(255, 255, 255, 0.40);
     --text-dark: #333;
     --text-light: #fff;
     --brown: #8a6c5f;
@@ -59,8 +59,8 @@ body {
     align-items: center;
     justify-content: space-between;
     background: var(--glass-bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: 2px solid var(--glass-border);
     border-radius: 12px;
     padding: 10px 20px;
@@ -116,9 +116,9 @@ body {
     width: 100%;
     max-width: 420px;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.51);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border-left: 2px solid var(--glass-border);
     z-index: 100;
     display: flex;
@@ -264,9 +264,9 @@ body {
 
 /* Timer Card Styles */
 .timer-card {
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 20px;
     padding: 30px;
@@ -426,9 +426,9 @@ body {
 .settings-modal {
     width: 90%;
     max-width: 400px;
-    background: rgba(255, 255, 255, 0.57);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: 2px solid var(--glass-border);
     border-radius: 12px;
     padding: 30px;
