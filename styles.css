@@ -2,8 +2,8 @@
     --primary-color: #d77f54;
     --primary-dark: #b6613c;
     --bg-color: #6da2a3;
-    --glass-bg: rgba(255, 255, 255, 0.20);
-    --glass-border: rgba(255, 255, 255, 0.40);
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.30);
     --text-dark: #333;
     --text-light: #fff;
     --brown: #8a6c5f;
@@ -116,7 +116,7 @@ body {
     width: 100%;
     max-width: 420px;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.20);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border-left: 2px solid var(--glass-border);
@@ -264,7 +264,7 @@ body {
 
 /* Timer Card Styles */
 .timer-card {
-    background: rgba(255, 255, 255, 0.20);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border: 2px solid rgba(255, 255, 255, 0.4);
@@ -426,7 +426,7 @@ body {
 .settings-modal {
     width: 90%;
     max-width: 400px;
-    background: rgba(255, 255, 255, 0.20);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border: 2px solid var(--glass-border);
