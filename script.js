@@ -18,7 +18,11 @@ const MODES = {
     'long-break': 15 * 60
 };
 
-const savedSettings = JSON.parse(localStorage.getItem('pomodoroSettings'));
+let savedSettings = null;
+try {
+    savedSettings = JSON.parse(localStorage.getItem('pomodoroSettings'));
+} catch(e) { console.error('Error parsing settings', e); }
+
 if (savedSettings) {
     MODES['pomodoro'] = (savedSettings.pomodoro || 25) * 60;
     MODES['short-break'] = (savedSettings.shortBreak || 5) * 60;
@@ -146,21 +150,69 @@ document.getElementById('fullscreen-btn').addEventListener('click', () => {
     }
 });
 
-// Music toggle logic (Snowfall)
+// Music toggle logic (Seamless Crossfade)
 const musicBtn = document.getElementById('music-btn');
-const bgMusic = document.getElementById('music-audio');
-bgMusic.playbackRate = 1.35; // Faster version
 
+const audio1 = new Audio('assets/snowfall.mp3');
+const audio2 = new Audio('assets/snowfall.mp3');
+audio1.playbackRate = 1.35;
+audio2.playbackRate = 1.35;
+
+let currentAudio = audio1;
+let nextAudio = audio2;
+const CROSSFADE_DURATION = 3; // Start fading 3 seconds before end
 let musicEnabled = false;
+let isFading = false;
+
+function onTimeUpdate() {
+    if (!musicEnabled || isFading) return;
+    if (isNaN(currentAudio.duration)) return;
+
+    const timeRemaining = (currentAudio.duration - currentAudio.currentTime) / currentAudio.playbackRate;
+    if (timeRemaining <= CROSSFADE_DURATION && timeRemaining > 0.1) {
+        isFading = true;
+
+        nextAudio.currentTime = 0;
+        nextAudio.volume = 0;
+        nextAudio.play().catch(e => console.log(e));
+
+        const steps = 30;
+        const stepTime = (CROSSFADE_DURATION * 1000) / steps;
+        let currentStep = 0;
+
+        const fadeInterval = setInterval(() => {
+            currentStep++;
+            const ratio = currentStep / steps;
+
+            currentAudio.volume = Math.max(0, 1 - ratio);
+            nextAudio.volume = Math.min(1, ratio);
+
+            if (currentStep >= steps) {
+                clearInterval(fadeInterval);
+                currentAudio.pause();
+                currentAudio.volume = 1;
+
+                [currentAudio, nextAudio] = [nextAudio, currentAudio];
+                isFading = false;
+            }
+        }, stepTime);
+    }
+}
+
+audio1.addEventListener('timeupdate', onTimeUpdate);
+audio2.addEventListener('timeupdate', onTimeUpdate);
 
 musicBtn.addEventListener('click', () => {
     musicEnabled = !musicEnabled;
     if (musicEnabled) {
-        bgMusic.play().catch(e => console.log("Audio play failed:", e));
+        currentAudio.volume = 1;
+        currentAudio.play().catch(e => console.log(e));
         musicBtn.classList.add('active');
     } else {
-        bgMusic.pause();
+        currentAudio.pause();
+        nextAudio.pause();
         musicBtn.classList.remove('active');
+        isFading = false;
     }
 });
 
@@ -172,7 +224,10 @@ const todoInput = document.getElementById('todo-input');
 const addTodoBtn = document.getElementById('add-todo-btn');
 const todoList = document.getElementById('todo-list');
 
-let tasks = JSON.parse(localStorage.getItem('pomodoroTasks')) || [];
+let tasks = [];
+try {
+    tasks = JSON.parse(localStorage.getItem('pomodoroTasks')) || [];
+} catch(e) { console.error('Error parsing tasks', e); }
 
 function saveTasks() {
     localStorage.setItem('pomodoroTasks', JSON.stringify(tasks));
