@@ -75,6 +75,20 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
 .logo {
     color: var(--primary-dark);
     font-size: 1.8rem;
