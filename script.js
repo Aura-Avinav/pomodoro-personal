@@ -1,3 +1,10 @@
+const videoSources = [
+    'assets/anime-school-girl-broken-heart-pixel-moewalls-com.mp4',
+    'assets/orion-spur-pixel-moewalls-com.mp4'
+];
+const randomVideo = videoSources[Math.floor(Math.random() * videoSources.length)];
+document.getElementById('bg-video').src = randomVideo;
+
 const timeDisplay = document.getElementById('time-display');
 const playBtn = document.getElementById('play-btn');
 const resetBtn = document.getElementById('reset-btn');
