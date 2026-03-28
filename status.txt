@@ -1,0 +1,5 @@
+ D assets/bg.png
+ D favicon.png
+ M script.js
+?? favicon.jpeg
+?? status.txt

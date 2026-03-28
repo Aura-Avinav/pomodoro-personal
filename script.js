@@ -235,6 +235,9 @@ function saveTasks() {
 
 function renderTasks() {
     todoList.innerHTML = '';
+    const displayList = document.getElementById('todo-display-list');
+    if (displayList) displayList.innerHTML = '';
+
     tasks.forEach((task, index) => {
         const li = document.createElement('li');
         li.className = `todo-item ${task.completed ? 'completed' : ''}`;
@@ -246,6 +249,13 @@ function renderTasks() {
             </div>
         `;
         todoList.appendChild(li);
+
+        if (displayList) {
+            const dLi = document.createElement('li');
+            dLi.className = `todo-display-item ${task.completed ? 'completed' : ''}`;
+            dLi.textContent = task.text;
+            displayList.appendChild(dLi);
+        }
     });
 }
 
@@ -351,4 +361,5 @@ saveSettingsBtn.addEventListener('click', () => {
 
 // Initialize display
 updateDisplay();
+renderTasks();
 
