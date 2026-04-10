@@ -1,6 +1,10 @@
 const videoSources = [
     'assets/anime-school-girl-broken-heart-pixel-moewalls-com.mp4',
-    'assets/orion-spur-pixel-moewalls-com.mp4'
+    'assets/orion-spur-pixel-moewalls-com.mp4',
+    'assets/cherry-blossom-house-japan-pixel-wallpaperwaifu-com.mp4',
+    'assets/japan-rainy-day-wallpaperwaifu-com.mp4',
+    'assets/pixel-forest-waterfall-wallpaperwaifu-com.mp4',
+    'assets/sunset-on-the-lake-pixel-wallpaperwaifu-com.mp4'
 ];
 const randomVideo = videoSources[Math.floor(Math.random() * videoSources.length)];
 document.getElementById('bg-video').src = randomVideo;
