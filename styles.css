@@ -305,8 +305,8 @@ body {
 }
 
 .action-btn {
-    background: var(--brown);
-    border: 2px solid var(--brown-dark);
+    background: var(--primary-color);
+    border: 2px solid var(--primary-dark);
     color: white;
     width: 50px;
     height: 45px;
@@ -314,12 +314,12 @@ body {
     cursor: pointer;
     transition: all 0.1s;
     font-size: 1.2rem;
-    box-shadow: 0 5px 0 var(--brown-dark);
+    box-shadow: 0 5px 0 var(--primary-dark);
 }
 
 .action-btn:active {
     transform: translateY(5px);
-    box-shadow: 0 0 0 var(--brown-dark);
+    box-shadow: 0 0 0 var(--primary-dark);
 }
 
 .action-btn#play-btn {
